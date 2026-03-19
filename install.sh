@@ -47,4 +47,12 @@ else
   echo "==> OpenShift CLI already installed, skipping."
 fi
 
+# 6. GitHub CLI
+if ! command -v gh &>/dev/null; then
+  echo "==> Installing GitHub CLI..."
+  brew install gh
+else
+  echo "==> GitHub CLI already installed, skipping."
+fi
+
 echo "==> innie macOS setup complete!"

@@ -18,5 +18,6 @@ Run the following single command to install all dependencies:
 | [Cursor](https://cursor.sh) | `brew install --cask cursor` |
 | [Claude](https://claude.ai/download) | `brew install --cask claude` |
 | [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) | `brew install openshift-cli` |
+| [GitHub CLI (`gh`)](https://cli.github.com) | `brew install gh` |
 
 The script is idempotent — re-running it is safe and will skip anything already installed.
