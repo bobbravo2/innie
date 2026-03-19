@@ -19,5 +19,7 @@ Run the following single command to install all dependencies:
 | [Claude](https://claude.ai/download) | `brew install --cask claude` |
 | [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) | `brew install openshift-cli` |
 | [GitHub CLI (`gh`)](https://cli.github.com) | `brew install gh` |
+| [`uvx`](https://docs.astral.sh/uv/guides/tools/) (via `uv`) | `brew install uv` |
+| [Python + pip](https://www.python.org) | `brew install python` |
 
 The script is idempotent — re-running it is safe and will skip anything already installed.

@@ -193,6 +193,52 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# uvx section
+# ---------------------------------------------------------------------------
+
+@test "installs uvx when uvx is not on PATH" {
+  # Use absolute bash path + restricted PATH to prevent finding system-installed uvx
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Installing uvx"* ]]
+}
+
+@test "skips uvx when uvx is already installed" {
+  cat > "$MOCK_BIN/uvx" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/uvx"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"uvx already installed, skipping"* ]]
+}
+
+# ---------------------------------------------------------------------------
+# Python + pip section
+# ---------------------------------------------------------------------------
+
+@test "installs Python when python3 is not on PATH" {
+  # Use absolute bash path + restricted PATH to prevent finding system python3
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Installing Python"* ]]
+}
+
+@test "skips Python when python3 is already installed" {
+  cat > "$MOCK_BIN/python3" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/python3"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Python already installed, skipping"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -204,7 +250,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh; do
+  for tool in gcloud oc gh uvx python3; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -227,4 +273,6 @@ EOF
   [[ "$output" == *"Claude already installed"* ]]
   [[ "$output" == *"OpenShift CLI already installed"* ]]
   [[ "$output" == *"GitHub CLI already installed"* ]]
+  [[ "$output" == *"uvx already installed"* ]]
+  [[ "$output" == *"Python already installed"* ]]
 }

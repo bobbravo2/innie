@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Unit tests — run on Linux with mock binaries (fast, no Homebrew needed)
+  # ---------------------------------------------------------------------------
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install bats
+        run: npm install -g bats
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Run unit tests
+        run: bats test/install.bats
+
+  # ---------------------------------------------------------------------------
+  # E2E — run the real script on macOS and verify every tool is available
+  # ---------------------------------------------------------------------------
+  e2e:
+    name: E2E (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run install script
+        run: bash install.sh
+
+      - name: Verify command-line tools are available
+        run: |
+          command -v gcloud
+          command -v oc
+          command -v gh
+          command -v uvx
+          command -v python3
+          command -v pip3

@@ -55,4 +55,20 @@ else
   echo "==> GitHub CLI already installed, skipping."
 fi
 
+# 7. uvx (via uv)
+if ! command -v uvx &>/dev/null; then
+  echo "==> Installing uvx (via uv)..."
+  brew install uv
+else
+  echo "==> uvx already installed, skipping."
+fi
+
+# 8. Python + pip
+if ! command -v python3 &>/dev/null; then
+  echo "==> Installing Python (includes pip)..."
+  brew install python
+else
+  echo "==> Python already installed, skipping."
+fi
+
 echo "==> innie macOS setup complete!"
