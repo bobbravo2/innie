@@ -18,11 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install bats
-        run: npm install -g bats
-
-      - name: Install shellcheck
-        run: sudo apt-get install -y shellcheck
+      - name: Install bats and shellcheck
+        run: sudo apt-get install -y bats shellcheck
 
       - name: Run unit tests
         run: bats test/install.bats
