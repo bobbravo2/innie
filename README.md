@@ -1,5 +1,5 @@
 # innie
-An idempotent setup script for my work laptop on macOS
+An idempotent setup script for my work laptop on macOS. A fun reference to the Apple TV Series, Severance. 
 
 ## Install
 
