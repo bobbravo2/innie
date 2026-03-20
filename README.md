@@ -1,12 +1,12 @@
 # innie
 
-An idempotent setup script for my work laptop on macOS.
+Scripts and customizations for my macOS development laptop.
 
 ## Useful CLI Utilities
 
 * `brew` - [Homebrew](https://brew.sh/) - package manager for macOS
 * `gh` - GitHub CLI (`brew install gh`) - create PRs, manage issues, etc.
-* `claude` - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) - AI in your terminal
+* `claude` - [Claude CLI](https://docs.anthropic.com/en/docs/claude-code) - AI coding agent in your terminal
 * `bw` - [Bitwarden CLI](https://bitwarden.com/help/cli/) - manage password entries from the terminal (`brew install bitwarden-cli`)
 * `oc` - OpenShift CLI - log into OpenShift clusters
 * `k9s` - TUI for Kubernetes resources (`brew install k9s`)
