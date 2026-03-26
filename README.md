@@ -17,7 +17,9 @@ Run the following single command to install all dependencies:
 | [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) | `brew install --cask google-cloud-sdk` |
 | [Cursor](https://cursor.sh) | `brew install --cask cursor` |
 | [Claude](https://claude.ai/download) | `brew install --cask claude` |
+| [AWS CLI (`aws`)](https://aws.amazon.com/cli/) | `brew install awscli` |
 | [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) | `brew install openshift-cli` |
+| [ROSA CLI (`rosa`)](https://docs.openshift.com/rosa/cli_reference/rosa_cli/rosa-get-started-cli.html) | `brew install rosa-cli` |
 | [GitHub CLI (`gh`)](https://cli.github.com) | `brew install gh` |
 | [`uvx`](https://docs.astral.sh/uv/guides/tools/) (via `uv`) | `brew install uv` |
 | [Python + pip](https://www.python.org) | `brew install python` |

@@ -38,8 +38,10 @@ jobs:
 
       - name: Verify command-line tools are available
         run: |
+          command -v aws
           command -v gcloud
           command -v oc
+          command -v rosa
           command -v gh
           command -v uvx
           command -v python3

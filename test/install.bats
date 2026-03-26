@@ -148,6 +148,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# AWS CLI section
+# ---------------------------------------------------------------------------
+
+@test "installs AWS CLI when aws is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Installing AWS CLI"* ]]
+}
+
+@test "skips AWS CLI when aws is already installed" {
+  cat > "$MOCK_BIN/aws" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/aws"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"AWS CLI already installed, skipping"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # OpenShift CLI section
 # ---------------------------------------------------------------------------
 
@@ -167,6 +189,28 @@ EOF
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
   [[ "$output" == *"OpenShift CLI already installed, skipping"* ]]
+}
+
+# ---------------------------------------------------------------------------
+# ROSA CLI section
+# ---------------------------------------------------------------------------
+
+@test "installs ROSA CLI when rosa is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Installing ROSA CLI"* ]]
+}
+
+@test "skips ROSA CLI when rosa is already installed" {
+  cat > "$MOCK_BIN/rosa" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/rosa"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"ROSA CLI already installed, skipping"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -250,7 +294,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3; do
+  for tool in gcloud aws oc rosa gh uvx python3; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -271,7 +315,9 @@ EOF
   [[ "$output" == *"Google Cloud CLI already installed"* ]]
   [[ "$output" == *"Cursor already installed"* ]]
   [[ "$output" == *"Claude already installed"* ]]
+  [[ "$output" == *"AWS CLI already installed"* ]]
   [[ "$output" == *"OpenShift CLI already installed"* ]]
+  [[ "$output" == *"ROSA CLI already installed"* ]]
   [[ "$output" == *"GitHub CLI already installed"* ]]
   [[ "$output" == *"uvx already installed"* ]]
   [[ "$output" == *"Python already installed"* ]]

@@ -39,7 +39,15 @@ else
   echo "🤖 Claude already installed, skipping."
 fi
 
-# 5. OpenShift CLI (oc)
+# 5. AWS CLI
+if ! command -v aws &>/dev/null; then
+  echo "☁️  Installing AWS CLI..."
+  brew install awscli
+else
+  echo "☁️  AWS CLI already installed, skipping."
+fi
+
+# 6. OpenShift CLI (oc)
 if ! command -v oc &>/dev/null; then
   echo "🔴 Installing OpenShift CLI..."
   brew install openshift-cli
@@ -47,7 +55,15 @@ else
   echo "🔴 OpenShift CLI already installed, skipping."
 fi
 
-# 6. GitHub CLI
+# 7. ROSA CLI
+if ! command -v rosa &>/dev/null; then
+  echo "🌹 Installing ROSA CLI..."
+  brew install rosa-cli
+else
+  echo "🌹 ROSA CLI already installed, skipping."
+fi
+
+# 8. GitHub CLI
 if ! command -v gh &>/dev/null; then
   echo "🐙 Installing GitHub CLI..."
   brew install gh
@@ -55,7 +71,7 @@ else
   echo "🐙 GitHub CLI already installed, skipping."
 fi
 
-# 7. uvx (via uv)
+# 9. uvx (via uv)
 if ! command -v uvx &>/dev/null; then
   echo "⚡ Installing uvx (via uv)..."
   brew install uv
@@ -63,7 +79,7 @@ else
   echo "⚡ uvx already installed, skipping."
 fi
 
-# 8. Python + pip
+# 10. Python + pip
 if ! command -v python3 &>/dev/null; then
   echo "🐍 Installing Python (includes pip)..."
   brew install python
