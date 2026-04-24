@@ -23,6 +23,8 @@ Welcome to the Macrodata Refinement department. This is your **employee handbook
 
 To add a new tool to the setup script, complete **all four** steps below. Skipping one is how we end up in the Break Room.
 
+Need the Board to approve something first? [Requisition a new tool](https://github.com/bobbravo2/innie/issues/new/choose).
+
 ### Checklist
 
 1. **`install.sh`** — Add a numbered, idempotent block following the existing pattern:
@@ -107,7 +109,7 @@ Look for issues labelled **`good-first-refinement`**. The Board has pre-approved
 
 ## Reporting a workplace incident
 
-Something explode in the elevator? Use **Issues → Report a Workplace Incident** (bug report form) with your macOS version, shell, and what you expected vs. what happened.
+Something explode in the elevator? [Create a new workplace incident](https://github.com/bobbravo2/innie/issues/new/choose) with your macOS version, shell, and what you expected vs. what happened.
 
 ---
 
