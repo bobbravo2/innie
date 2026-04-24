@@ -71,4 +71,12 @@ else
   echo "🐍 Python already installed, skipping."
 fi
 
+# 9. Google Workspace CLI (gws)
+if ! command -v gws &>/dev/null; then
+  echo "📧 Installing Google Workspace CLI..."
+  brew install googleworkspace-cli
+else
+  echo "📧 Google Workspace CLI already installed, skipping."
+fi
+
 echo "✅ innie macOS setup complete!"
