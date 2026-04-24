@@ -44,6 +44,8 @@ jobs:
       - name: Run install script
         run: bash install.sh
 
+      # CLI-only tools: verify each binary responds. GUI-only casks (e.g. Miro)
+      # typically have no `command -v` binary — skip those here.
       - name: Verify command-line tools are available
         run: |
           gcloud --version
@@ -52,3 +54,4 @@ jobs:
           uvx --version
           python3 --version
           pip3 --version
+          gws --version
