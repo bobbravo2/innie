@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment / secrets
+.env
+.env.*
+*.env
+
+# Shell history / session files
+.bash_history
+.zsh_history
+.zsh_sessions/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Credentials and keys
+*.pem
+*.key
+id_rsa
+id_ed25519
+credentials.json
+token.json
