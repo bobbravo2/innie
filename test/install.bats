@@ -239,6 +239,7 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Miro section
 # ---------------------------------------------------------------------------
 
@@ -262,6 +263,29 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Google Workspace CLI section
+# ---------------------------------------------------------------------------
+
+@test "installs Google Workspace CLI when gws is not on PATH" {
+  # Use absolute bash path + restricted PATH to prevent finding system-installed gws
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Google Workspace CLI has not reported for duty"* ]]
+}
+
+@test "skips Google Workspace CLI when gws is already installed" {
+  cat > "$MOCK_BIN/gws" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/gws"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -273,7 +297,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3; do
+  for tool in gcloud oc gh uvx python3 gws; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -299,4 +323,5 @@ EOF
   [[ "$output" == *"uvx is already present"* ]]
   [[ "$output" == *"Python is already slithering"* ]]
   [[ "$output" == *"Miro is already on the Severed Floor"* ]]
+  [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
 }

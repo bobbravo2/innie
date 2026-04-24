@@ -82,6 +82,14 @@ else
   echo "🪄 Miro is already on the Severed Floor."
 fi
 
+# 10. Google Workspace CLI (gws) — one API for all of Workspace
+if ! command -v gws &>/dev/null; then
+  echo "📧 Google Workspace CLI has not reported for duty. Installing..."
+  brew install googleworkspace-cli
+else
+  echo "📧 Google Workspace CLI is already filing reports on the floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"

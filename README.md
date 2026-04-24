@@ -38,6 +38,7 @@ The following tools are installed (or skipped if already present):
 | [`uvx`](https://docs.astral.sh/uv/guides/tools/) (via `uv`) | `brew install uv` |
 | [Python + pip](https://www.python.org) | `brew install python` |
 | [Miro](https://miro.com/apps/) | `brew install --cask miro` |
+| [Google Workspace CLI (`gws`)](https://github.com/googleworkspace/cli) | `brew install googleworkspace-cli` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 
