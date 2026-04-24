@@ -36,6 +36,10 @@ The script is **idempotent** — re-running it is safe and will skip anything al
 
 Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+## Disclaimer
+
+*Severance* and all related names, characters, and indicia are trademarks of Apple Inc. This project is not affiliated with, endorsed by, or sponsored by Apple Inc. in any way. The Severance theme is used purely for creative flavour in a personal open-source project.
+
 ## License
 
 [MIT](LICENSE)
