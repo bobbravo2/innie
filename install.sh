@@ -73,7 +73,15 @@ else
   echo "🐍 Python is already slithering through the floor."
 fi
 
-# 9. Google Workspace CLI (gws) — one API for all of Workspace
+# 9. Miro — the visual collaboration board
+if ! brew list --cask miro &>/dev/null; then
+  echo "🪄 Miro has not been cleared by the O&D department. Installing..."
+  brew install --cask miro
+else
+  echo "🪄 Miro is already on the Severed Floor."
+fi
+
+# 10. Google Workspace CLI (gws) — one API for all of Workspace
 if ! command -v gws &>/dev/null; then
   echo "📧 Google Workspace CLI has not reported for duty. Installing..."
   brew install googleworkspace-cli
