@@ -29,6 +29,7 @@ The following tools are installed (or skipped if already present):
 | [GitHub CLI (`gh`)](https://cli.github.com) | `brew install gh` |
 | [`uvx`](https://docs.astral.sh/uv/guides/tools/) (via `uv`) | `brew install uv` |
 | [Python + pip](https://www.python.org) | `brew install python` |
+| [Miro](https://miro.com/apps/) | `brew install --cask miro` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 

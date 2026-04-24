@@ -239,6 +239,29 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Miro section
+# ---------------------------------------------------------------------------
+
+@test "installs Miro when the cask is not listed" {
+  # Default brew mock returns 1 for "list --cask", so Miro is not installed
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Miro has not been cleared"* ]]
+}
+
+@test "skips Miro when the cask is already listed" {
+  cat > "$MOCK_BIN/brew" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/brew"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Miro is already on the Severed Floor"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -275,4 +298,5 @@ EOF
   [[ "$output" == *"GitHub CLI is already on the floor"* ]]
   [[ "$output" == *"uvx is already present"* ]]
   [[ "$output" == *"Python is already slithering"* ]]
+  [[ "$output" == *"Miro is already on the Severed Floor"* ]]
 }

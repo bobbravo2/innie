@@ -73,6 +73,14 @@ else
   echo "🐍 Python is already slithering through the floor."
 fi
 
+# 9. Miro — the visual collaboration board
+if ! brew list --cask miro &>/dev/null; then
+  echo "🪄 Miro has not been cleared by the O&D department. Installing..."
+  brew install --cask miro
+else
+  echo "🪄 Miro is already on the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
