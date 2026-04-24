@@ -71,4 +71,12 @@ else
   echo "🐍 Python already installed, skipping."
 fi
 
+# 9. Miro
+if ! brew list --cask miro &>/dev/null; then
+  echo "🪄 Installing Miro..."
+  brew install --cask miro
+else
+  echo "🪄 Miro already installed, skipping."
+fi
+
 echo "✅ innie macOS setup complete!"
