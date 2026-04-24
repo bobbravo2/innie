@@ -1,0 +1,53 @@
+name: Report a Workplace Incident
+description: Something has gone wrong on the Severed Floor.
+title: "[Incident]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a report. The Macrodata Refinement department takes
+        workplace incidents seriously. Please answer each section below.
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: Describe the correct behaviour from the handbook.
+      placeholder: e.g. Re-running install.sh should skip tools already present.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+      description: Paste error output or describe the failure.
+      placeholder: Include terminal output if possible.
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      description: Apple menu → About This Mac, or `sw_vers`.
+      placeholder: e.g. 15.4 (24E248)
+    validations:
+      required: true
+  - type: dropdown
+    id: shell
+    attributes:
+      label: Shell
+      options:
+        - bash
+        - zsh
+        - fish
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Install method (stable release vs main), fork, anything else that helps.
+    validations:
+      required: false

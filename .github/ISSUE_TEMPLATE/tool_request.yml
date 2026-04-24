@@ -1,0 +1,56 @@
+name: Requisition a New Tool
+description: Request a new tool for the Macrodata Refinement floor.
+title: "[Requisition]: "
+labels:
+  - enhancement
+  - new-tool
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to propose a tool for **innie**. You do not have to open a
+        PR yourself — the department can evaluate the requisition first.
+  - type: input
+    id: tool_name
+    attributes:
+      label: Tool name
+      description: Short name as users would know it.
+      placeholder: e.g. Docker Desktop
+    validations:
+      required: true
+  - type: input
+    id: tool_url
+    attributes:
+      label: Tool URL
+      description: Official homepage or GitHub repository.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Preferred install method
+      description: How you expect it to land on macOS.
+      options:
+        - brew formula
+        - brew cask
+        - official script (curl | bash, etc.)
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why does the department need this?
+      description: One or two sentences on use case and who benefits.
+    validations:
+      required: true
+  - type: dropdown
+    id: willing_pr
+    attributes:
+      label: Willing to submit a PR?
+      options:
+        - "yes"
+        - "no"
+    validations:
+      required: true
