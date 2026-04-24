@@ -18,6 +18,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     name: Tag and release
@@ -68,6 +72,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${{ steps.version.outputs.tag }}"
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            echo "Tag $tag already exists — skipping."
+            exit 0
+          fi
           git tag "$tag"
           git push origin "$tag"
           gh release create "$tag" --generate-notes --title "$tag" install.sh
