@@ -11,6 +11,14 @@ Run it once. Run it again. Your innie won't remember the previous session, but t
 
 ## Quick install
 
+Stable (latest release):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://github.com/bobbravo2/innie/releases/latest/download/install.sh)"
+```
+
+Bleeding edge (main branch):
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bobbravo2/innie/main/install.sh)"
 ```
