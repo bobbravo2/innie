@@ -68,14 +68,14 @@ teardown() {
   # but by then it has already printed the "Installing Homebrew" message.
   # Exit 127 = command not found (brew unavailable for later sections).
   run -127 bash "$SCRIPT"
-  [[ "$output" == *"Installing Homebrew"* ]]
+  [[ "$output" == *"Refining package manager"* ]]
 }
 
 @test "updates Homebrew when brew is already installed" {
   # brew is on PATH via our mock
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Homebrew already installed, updating"* ]]
+  [[ "$output" == *"Homebrew already refined"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -86,7 +86,7 @@ teardown() {
   # Use absolute bash path + restricted PATH to prevent finding system-installed gcloud
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing Google Cloud CLI"* ]]
+  [[ "$output" == *"Google Cloud CLI has been placed"* ]]
 }
 
 @test "skips GCP CLI when gcloud is already installed" {
@@ -98,7 +98,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Google Cloud CLI already installed, skipping"* ]]
+  [[ "$output" == *"Google Cloud CLI already present"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -109,7 +109,7 @@ EOF
   # Default brew mock returns 1 for "list --cask", so Cursor is not installed
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing Cursor"* ]]
+  [[ "$output" == *"Cursor awaits in the Break Room"* ]]
 }
 
 @test "skips Cursor when the cask is already listed" {
@@ -122,7 +122,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Cursor already installed, skipping"* ]]
+  [[ "$output" == *"Cursor is already on the Severed Floor"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -132,7 +132,7 @@ EOF
 @test "installs Claude when the cask is not listed" {
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing Claude"* ]]
+  [[ "$output" == *"Claude has not yet reported"* ]]
 }
 
 @test "skips Claude when the cask is already listed" {
@@ -144,7 +144,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Claude already installed, skipping"* ]]
+  [[ "$output" == *"Claude is already seated"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -154,7 +154,7 @@ EOF
 @test "installs OpenShift CLI when oc is not on PATH" {
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing OpenShift CLI"* ]]
+  [[ "$output" == *"OpenShift CLI has been approved"* ]]
 }
 
 @test "skips OpenShift CLI when oc is already installed" {
@@ -166,7 +166,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"OpenShift CLI already installed, skipping"* ]]
+  [[ "$output" == *"OpenShift CLI is already badged in"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -177,7 +177,7 @@ EOF
   # Use absolute bash path + restricted PATH to prevent finding system-installed gh
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing GitHub CLI"* ]]
+  [[ "$output" == *"GitHub CLI not found"* ]]
 }
 
 @test "skips GitHub CLI when gh is already installed" {
@@ -189,7 +189,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"GitHub CLI already installed, skipping"* ]]
+  [[ "$output" == *"GitHub CLI is already on the floor"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -200,7 +200,7 @@ EOF
   # Use absolute bash path + restricted PATH to prevent finding system-installed uvx
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing uvx"* ]]
+  [[ "$output" == *"uvx not detected"* ]]
 }
 
 @test "skips uvx when uvx is already installed" {
@@ -212,7 +212,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"uvx already installed, skipping"* ]]
+  [[ "$output" == *"uvx is already present"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -223,7 +223,7 @@ EOF
   # Use absolute bash path + restricted PATH to prevent finding system python3
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Installing Python"* ]]
+  [[ "$output" == *"Python not found"* ]]
 }
 
 @test "skips Python when python3 is already installed" {
@@ -235,7 +235,30 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Python already installed, skipping"* ]]
+  [[ "$output" == *"Python is already slithering"* ]]
+}
+
+# ---------------------------------------------------------------------------
+# Miro section
+# ---------------------------------------------------------------------------
+
+@test "installs Miro when the cask is not listed" {
+  # Default brew mock returns 1 for "list --cask", so Miro is not installed
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Miro has not been cleared"* ]]
+}
+
+@test "skips Miro when the cask is already listed" {
+  cat > "$MOCK_BIN/brew" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/brew"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Miro is already on the Severed Floor"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -245,7 +268,7 @@ EOF
 @test "prints completion message" {
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"innie macOS setup complete"* ]]
+  [[ "$output" == *"Macrodata Refinement environment initialised"* ]]
 }
 
 @test "exits successfully when all tools are already installed" {
@@ -267,12 +290,13 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Homebrew already installed"* ]]
-  [[ "$output" == *"Google Cloud CLI already installed"* ]]
-  [[ "$output" == *"Cursor already installed"* ]]
-  [[ "$output" == *"Claude already installed"* ]]
-  [[ "$output" == *"OpenShift CLI already installed"* ]]
-  [[ "$output" == *"GitHub CLI already installed"* ]]
-  [[ "$output" == *"uvx already installed"* ]]
-  [[ "$output" == *"Python already installed"* ]]
+  [[ "$output" == *"Homebrew already refined"* ]]
+  [[ "$output" == *"Google Cloud CLI already present"* ]]
+  [[ "$output" == *"Cursor is already on the Severed Floor"* ]]
+  [[ "$output" == *"Claude is already seated"* ]]
+  [[ "$output" == *"OpenShift CLI is already badged in"* ]]
+  [[ "$output" == *"GitHub CLI is already on the floor"* ]]
+  [[ "$output" == *"uvx is already present"* ]]
+  [[ "$output" == *"Python is already slithering"* ]]
+  [[ "$output" == *"Miro is already on the Severed Floor"* ]]
 }
