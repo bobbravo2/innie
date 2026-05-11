@@ -27,11 +27,14 @@ else
 fi
 
 # 3. Cursor — the IDE your innie deserves
-if ! brew list --cask cursor &>/dev/null; then
+CURSOR_APP_PATH="${CURSOR_APP_PATH:-/Applications/Cursor.app}"
+if brew list --cask cursor &>/dev/null; then
+  echo "🖥️  Cursor is already on the Severed Floor."
+elif [[ -d "$CURSOR_APP_PATH" ]]; then
+  echo "🖥️  Cursor app already detected at $CURSOR_APP_PATH. Skipping cask install to avoid conflicts."
+else
   echo "🖥️  Cursor awaits in the Break Room. Installing..."
   brew install --cask cursor
-else
-  echo "🖥️  Cursor is already on the Severed Floor."
 fi
 
 # 4. Claude — your Optics & Design colleague
