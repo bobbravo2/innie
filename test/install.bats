@@ -125,6 +125,15 @@ EOF
   [[ "$output" == *"Cursor is already on the Severed Floor"* ]]
 }
 
+@test "skips Cursor cask install when app already exists but cask is not listed" {
+  cursor_app_path="$MOCK_BIN/Cursor.app"
+  mkdir -p "$cursor_app_path"
+
+  run env CURSOR_APP_PATH="$cursor_app_path" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Cursor app already detected"* ]]
+}
+
 # ---------------------------------------------------------------------------
 # Claude section
 # ---------------------------------------------------------------------------
