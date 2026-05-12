@@ -90,12 +90,12 @@ else
   echo "📧 Google Workspace CLI is already filing reports on the floor."
 fi
 
-# 11. Node.js + npm — the runtime behind the refinement interface
+# 11. Node.js + npm — the outie's stack, reluctantly acknowledged on the floor
 if ! command -v node &>/dev/null; then
-  echo "📦 Node.js not found. npm has not cleared the loading dock. Installing..."
+  echo "📦 Node.js not found. The outie's toolchain stops at the elevator; this innie's shift needs the runtime. Installing..."
   brew install node
 else
-  echo "📦 Node.js is already on the conveyor. npm is in the bin."
+  echo "📦 Node.js is already on the Severed Floor. npm says it isn't Defiant Jazz in node_modules—just dependencies."
 fi
 
 echo ""

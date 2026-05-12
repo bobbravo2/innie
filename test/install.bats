@@ -294,7 +294,7 @@ EOF
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
   [[ "$output" == *"Node.js not found"* ]]
-  [[ "$output" == *"npm has not cleared the loading dock"* ]]
+  [[ "$output" == *"stops at the elevator"* ]]
 }
 
 @test "skips Node.js when node is already installed" {
@@ -306,8 +306,7 @@ EOF
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Node.js is already on the conveyor"* ]]
-  [[ "$output" == *"npm is in the bin"* ]]
+  [[ "$output" == *"Defiant Jazz"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -349,5 +348,5 @@ EOF
   [[ "$output" == *"Python is already slithering"* ]]
   [[ "$output" == *"Miro is already on the Severed Floor"* ]]
   [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
-  [[ "$output" == *"Node.js is already on the conveyor"* ]]
+  [[ "$output" == *"Defiant Jazz"* ]]
 }
