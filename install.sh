@@ -93,6 +93,14 @@ else
   echo "📧 Google Workspace CLI is already filing reports on the floor."
 fi
 
+# 11. Node.js + npm — the outie's stack, reluctantly acknowledged on the floor
+if ! command -v node &>/dev/null; then
+  echo "📦 Node.js not found. The outie's toolchain stops at the elevator; this innie's shift needs the runtime. Installing..."
+  brew install node
+else
+  echo "📦 Node.js is already on the Severed Floor. npm says it isn't Defiant Jazz in node_modules—just dependencies."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
