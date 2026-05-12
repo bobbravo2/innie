@@ -42,6 +42,7 @@ The following tools are installed (or skipped if already present):
 | [Python + pip](https://www.python.org) | `brew install python` |
 | [Miro](https://miro.com/apps/) | `brew install --cask miro` |
 | [Google Workspace CLI (`gws`)](https://github.com/googleworkspace/cli) | `brew install googleworkspace-cli` |
+| [Node.js + npm](https://nodejs.org) | `brew install node` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 

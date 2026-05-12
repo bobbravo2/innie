@@ -55,3 +55,5 @@ jobs:
           python3 --version
           pip3 --version
           gws --version
+          node --version
+          npm --version
