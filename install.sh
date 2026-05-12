@@ -90,6 +90,14 @@ else
   echo "📧 Google Workspace CLI is already filing reports on the floor."
 fi
 
+# 11. Node.js + npm — the runtime behind the refinement interface
+if ! command -v node &>/dev/null; then
+  echo "📦 Node.js not found. npm has not cleared the loading dock. Installing..."
+  brew install node
+else
+  echo "📦 Node.js is already on the conveyor. npm is in the bin."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"

@@ -286,6 +286,31 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Node.js + npm section
+# ---------------------------------------------------------------------------
+
+@test "installs Node.js when node is not on PATH" {
+  # Use absolute bash path + restricted PATH to prevent finding system-installed node
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Node.js not found"* ]]
+  [[ "$output" == *"npm has not cleared the loading dock"* ]]
+}
+
+@test "skips Node.js when node is already installed" {
+  cat > "$MOCK_BIN/node" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/node"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Node.js is already on the conveyor"* ]]
+  [[ "$output" == *"npm is in the bin"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -297,7 +322,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws; do
+  for tool in gcloud oc gh uvx python3 gws node; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -324,4 +349,5 @@ EOF
   [[ "$output" == *"Python is already slithering"* ]]
   [[ "$output" == *"Miro is already on the Severed Floor"* ]]
   [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
+  [[ "$output" == *"Node.js is already on the conveyor"* ]]
 }
