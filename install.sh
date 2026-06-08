@@ -101,6 +101,14 @@ else
   echo "📦 Node.js is already on the Severed Floor. npm says it isn't Defiant Jazz in node_modules—just dependencies."
 fi
 
+# 12. cloc — count lines of code across the Severed Floor
+if ! command -v cloc &>/dev/null; then
+  echo "🔢 cloc not found. The numbers must be counted. Installing..."
+  brew install cloc
+else
+  echo "🔢 cloc is already tallying lines on the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
