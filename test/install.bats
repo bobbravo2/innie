@@ -319,6 +319,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# cloc section
+# ---------------------------------------------------------------------------
+
+@test "installs cloc when cloc is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"cloc not found"* ]]
+}
+
+@test "skips cloc when cloc is already installed" {
+  cat > "$MOCK_BIN/cloc" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/cloc"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"cloc is already tallying lines"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -330,7 +352,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node; do
+  for tool in gcloud oc gh uvx python3 gws node cloc; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -358,4 +380,5 @@ EOF
   [[ "$output" == *"Miro is already on the Severed Floor"* ]]
   [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
   [[ "$output" == *"Defiant Jazz"* ]]
+  [[ "$output" == *"cloc is already tallying lines"* ]]
 }
