@@ -341,6 +341,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# act section
+# ---------------------------------------------------------------------------
+
+@test "installs act when act is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"act not found"* ]]
+}
+
+@test "skips act when act is already installed" {
+  cat > "$MOCK_BIN/act" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/act"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"act is already running scenes"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -352,7 +374,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc; do
+  for tool in gcloud oc gh uvx python3 gws node cloc act; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -381,4 +403,5 @@ EOF
   [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
   [[ "$output" == *"Defiant Jazz"* ]]
   [[ "$output" == *"cloc is already tallying lines"* ]]
+  [[ "$output" == *"act is already running scenes"* ]]
 }
