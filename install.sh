@@ -109,6 +109,14 @@ else
   echo "🔢 cloc is already tallying lines on the Severed Floor."
 fi
 
+# 13. act — run GitHub Actions locally without leaving the Severed Floor
+if ! command -v act &>/dev/null; then
+  echo "🎬 act not found. The Board requires local CI. Installing..."
+  brew install act
+else
+  echo "🎬 act is already running scenes on the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"

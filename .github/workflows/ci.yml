@@ -57,3 +57,5 @@ jobs:
           gws --version
           node --version
           npm --version
+          cloc --version
+          act --version

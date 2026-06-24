@@ -43,6 +43,8 @@ The following tools are installed (or skipped if already present):
 | [Miro](https://miro.com/apps/) | `brew install --cask miro` |
 | [Google Workspace CLI (`gws`)](https://github.com/googleworkspace/cli) | `brew install googleworkspace-cli` |
 | [Node.js + npm](https://nodejs.org) | `brew install node` |
+| [`cloc`](https://github.com/AlDanial/cloc) | `brew install cloc` |
+| [`act`](https://github.com/nektos/act) | `brew install act` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 
