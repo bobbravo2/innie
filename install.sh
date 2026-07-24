@@ -70,11 +70,12 @@ else
 fi
 
 # 8. Python + pip — the serpent of productivity
-if ! command -v python3 &>/dev/null; then
-  echo "🐍 Python not found. Kier wills it installed..."
+if ! command -v python3 &>/dev/null || ! command -v pip3 &>/dev/null; then
+  echo "🐍 Python and/or pip not found. Kier wills a modern toolchain installed..."
   brew install python
+  echo "🐍 Python and pip refined for modern development best practices."
 else
-  echo "🐍 Python is already slithering through the floor."
+  echo "🐍 Python and pip are already slithering through the floor."
 fi
 
 # 9. Miro — the visual collaboration board

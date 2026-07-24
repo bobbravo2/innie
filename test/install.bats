@@ -232,7 +232,7 @@ EOF
   # Use absolute bash path + restricted PATH to prevent finding system python3
   run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Python not found"* ]]
+  [[ "$output" == *"Python and/or pip not found"* ]]
 }
 
 @test "skips Python when python3 is already installed" {
@@ -241,10 +241,27 @@ EOF
 exit 0
 EOF
   chmod +x "$MOCK_BIN/python3"
+  cat > "$MOCK_BIN/pip3" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/pip3"
 
   run bash "$SCRIPT"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Python is already slithering"* ]]
+  [[ "$output" == *"Python and pip are already slithering"* ]]
+}
+
+@test "installs Python when pip3 is missing" {
+  cat > "$MOCK_BIN/python3" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/python3"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Python and/or pip not found"* ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -374,7 +391,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc act; do
+  for tool in gcloud oc gh uvx python3 pip3 gws node cloc act; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -398,7 +415,7 @@ EOF
   [[ "$output" == *"OpenShift CLI is already badged in"* ]]
   [[ "$output" == *"GitHub CLI is already on the floor"* ]]
   [[ "$output" == *"uvx is already present"* ]]
-  [[ "$output" == *"Python is already slithering"* ]]
+  [[ "$output" == *"Python and pip are already slithering"* ]]
   [[ "$output" == *"Miro is already on the Severed Floor"* ]]
   [[ "$output" == *"Google Workspace CLI is already filing reports"* ]]
   [[ "$output" == *"Defiant Jazz"* ]]
