@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   # ---------------------------------------------------------------------------
-  # Unit tests — run on Linux with mock binaries (fast, no Homebrew needed)
+  # Quality gate: unit tests run on Linux with mock binaries (fast, no Homebrew needed)
   # ---------------------------------------------------------------------------
   unit:
     name: Unit tests
@@ -32,7 +32,7 @@ jobs:
         run: bats test/install.bats
 
   # ---------------------------------------------------------------------------
-  # E2E — run the real script on macOS and verify every tool is available
+  # Quality gate: run the real installer on macOS and verify every tool is available
   # ---------------------------------------------------------------------------
   e2e:
     name: E2E (macOS)
