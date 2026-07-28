@@ -36,6 +36,13 @@ EOF
 exit 0
 EOF
   chmod +x "$MOCK_BIN/curl"
+
+  # sh mock: Ollama's install script pipes curl output into sh.
+  cat > "$MOCK_BIN/sh" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/sh"
 }
 
 teardown() {
@@ -363,6 +370,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Ollama section
+# ---------------------------------------------------------------------------
+
+@test "installs Ollama when ollama is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Ollama not found"* ]]
+}
+
+@test "skips Ollama when ollama is already installed" {
+  cat > "$MOCK_BIN/ollama" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/ollama"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Ollama is already running"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -374,7 +403,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc act; do
+  for tool in gcloud oc gh uvx python3 gws node cloc act ollama; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -404,4 +433,5 @@ EOF
   [[ "$output" == *"Defiant Jazz"* ]]
   [[ "$output" == *"cloc is already tallying lines"* ]]
   [[ "$output" == *"act is already running scenes"* ]]
+  [[ "$output" == *"Ollama is already running"* ]]
 }

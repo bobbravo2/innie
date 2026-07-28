@@ -117,6 +117,14 @@ else
   echo "🎬 act is already running scenes on the Severed Floor."
 fi
 
+# 14. Ollama — local models for the Severed Floor
+if ! command -v ollama &>/dev/null; then
+  echo "🦙 Ollama not found. The work needs a local model stack. Installing..."
+  brew install ollama
+else
+  echo "🦙 Ollama is already running on the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
