@@ -59,3 +59,4 @@ jobs:
           npm --version
           cloc --version
           act --version
+          ollama --version
