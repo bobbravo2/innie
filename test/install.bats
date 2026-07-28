@@ -1,5 +1,5 @@
 #!/usr/bin/env bats
-# Tests for install.sh
+# Tests for the local installer
 # Run with: bats test/install.bats
 
 bats_require_minimum_version 1.5.0

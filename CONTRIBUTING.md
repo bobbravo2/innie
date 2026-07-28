@@ -2,7 +2,7 @@
 
 > *"We are, all of us, so grateful to be here."*
 
-Welcome to the Macrodata Refinement department. This is your **employee handbook** for contributing to innie — the idempotent macOS setup script that keeps the Severed Floor humming.
+Welcome to the Macrodata Refinement department. This is your **employee handbook** for contributing to innie — the idempotent macOS installer that keeps the Severed Floor humming.
 
 ---
 
@@ -21,7 +21,7 @@ Welcome to the Macrodata Refinement department. This is your **employee handbook
 
 ## Requisitioning a new tool
 
-To add a new tool to the setup script, complete **all four** steps below. Skipping one is how we end up in the Break Room.
+To add a new tool to the installer, complete **all four** steps below. Skipping one is how we end up in the Break Room.
 
 Need the Board to approve something first? [Requisition a new tool](https://github.com/bobbravo2/innie/issues/new/choose).
 
@@ -31,8 +31,8 @@ Need the Board to approve something first? [Requisition a new tool](https://gith
    - **CLI tools** (binary on `PATH`): use `command -v <tool>` and `brew install <formula>`.
    - **GUI apps** (Homebrew cask): use `brew list --cask <name>` and `brew install --cask <name>`.
 2. **`test/install.bats`** — Add **two** tests: one where the tool is missing (install path), one where it is present (skip path). Assert on distinctive substrings from your `echo` lines.
-3. **`README.md`** — Add a row to **What gets refined**.
-4. **`.github/workflows/ci.yml`** — For CLI tools only, add a line under **Verify command-line tools** (e.g. `<tool> --version`). **GUI-only casks** often have no CLI — do not add a verify line; note it in the PR instead.
+3. **`README.md`** — Add a row to **What the installer provisions**.
+4. **`.github/workflows/ci.yml`** — For CLI tools only, add a line under **Verify command-line tools** (e.g. `<tool> --version`). **GUI-only casks** often have no CLI — do not add a verify line; note it in the PR instead. This workflow is a quality gate, not the primary distribution path.
 
 ### Worked example: adding `ripgrep` (`rg`)
 

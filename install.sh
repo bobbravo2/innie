@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Idempotent macOS setup script — a Lumon Industries production
+# Idempotent macOS installer — a Lumon Industries production
 # Usage (stable): /bin/bash -c "$(curl -fsSL https://github.com/bobbravo2/innie/releases/latest/download/install.sh)"
 # Usage (main): /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bobbravo2/innie/main/install.sh)"
 

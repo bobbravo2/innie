@@ -6,13 +6,15 @@
 
 > *"We hope you will be very happy here."* — Lumon Industries
 
-**innie** is an idempotent macOS setup script — named after the severed work-self from the Apple TV+ series [Severance](https://tv.apple.com/us/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx). Think of it as the **Macrodata Refinement department onboarding packet**: your outie has generously volunteered you for this floor. This handbook provisions your workstation. You will not remember why.
+**innie** is an idempotent macOS installer — named after the severed work-self from the Apple TV+ series [Severance](https://tv.apple.com/us/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx). Think of it as the **Macrodata Refinement department onboarding packet**: your outie has generously volunteered you for this floor. This handbook provisions your workstation. You will not remember why.
 
-Just as an innie arrives at Lumon with no memory of the outside world, this script provisions a fresh work environment from scratch, every time, safely.
+Just as an innie arrives at Lumon with no memory of the outside world, this installer provisions a fresh work environment from scratch, every time, safely.
 
 Run it once. Run it again. Your innie won't remember the previous session, but the tools will still be there.
 
-## Quick install
+## Local installer
+
+`install.sh` is the product. Releases package the same installer for the path of least resistance, and CI stays focused on quality gates.
 
 Stable (latest release):
 
@@ -26,7 +28,7 @@ Bleeding edge (main branch):
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bobbravo2/innie/main/install.sh)"
 ```
 
-## What gets refined
+## What the installer provisions
 
 The following tools are installed (or skipped if already present):
 
@@ -57,7 +59,7 @@ Want to add a tool to the Severed Floor? The pattern is always the same:
 3. **`README.md`** — Add a row to the table above.
 4. **`.github/workflows/ci.yml`** — If the tool exposes a CLI, add a verify line to the E2E step. (GUI-only casks like Miro have no `command -v` binary — skip CI verification for those.)
 
-Full orientation, a worked example, and departmental standards live in [CONTRIBUTING.md](CONTRIBUTING.md).
+Full orientation, a worked example, and the CI quality gates live in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contributing
 
