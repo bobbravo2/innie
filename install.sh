@@ -120,7 +120,7 @@ fi
 # 14. Ollama — local models for the Severed Floor
 if ! command -v ollama &>/dev/null; then
   echo "🦙 Ollama not found. The work needs a local model stack. Installing..."
-  curl -fsSL https://ollama.com/install.sh | sh
+  brew install ollama
 else
   echo "🦙 Ollama is already running on the Severed Floor."
 fi
