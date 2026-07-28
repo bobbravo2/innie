@@ -36,6 +36,13 @@ EOF
 exit 0
 EOF
   chmod +x "$MOCK_BIN/curl"
+
+  # sh mock: Ollama's install script pipes curl output into sh.
+  cat > "$MOCK_BIN/sh" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/sh"
 }
 
 teardown() {
