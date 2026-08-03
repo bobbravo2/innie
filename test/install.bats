@@ -392,6 +392,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# herdr section
+# ---------------------------------------------------------------------------
+
+@test "installs herdr when herdr is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"herdr not found"* ]]
+}
+
+@test "skips herdr when herdr is already installed" {
+  cat > "$MOCK_BIN/herdr" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/herdr"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"herdr is already herding tasks"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -403,7 +425,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc act ollama; do
+  for tool in gcloud oc gh uvx python3 gws node cloc act ollama herdr; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -434,4 +456,5 @@ EOF
   [[ "$output" == *"cloc is already tallying lines"* ]]
   [[ "$output" == *"act is already running scenes"* ]]
   [[ "$output" == *"Ollama is already running"* ]]
+  [[ "$output" == *"herdr is already herding tasks"* ]]
 }

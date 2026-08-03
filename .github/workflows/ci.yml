@@ -60,3 +60,4 @@ jobs:
           cloc --version
           act --version
           ollama --version
+          herdr --version

@@ -125,6 +125,14 @@ else
   echo "🦙 Ollama is already running on the Severed Floor."
 fi
 
+# 15. herdr — workflow orchestration for the Severed Floor
+if ! command -v herdr &>/dev/null; then
+  echo "🐑 herdr not found. The Board requires orderly orchestration. Installing..."
+  brew install herdr
+else
+  echo "🐑 herdr is already herding tasks on the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
