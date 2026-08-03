@@ -125,6 +125,14 @@ else
   echo "🦙 Ollama is already running on the Severed Floor."
 fi
 
+# 15. Tilt — local dev environment orchestrator
+if ! command -v tilt &>/dev/null; then
+  echo "🔦 Tilt not found. The dev environment needs orchestrating. Installing..."
+  brew install tilt
+else
+  echo "🔦 Tilt is already illuminating the Severed Floor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
