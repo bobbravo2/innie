@@ -48,6 +48,7 @@ The following tools are installed (or skipped if already present):
 | [`cloc`](https://github.com/AlDanial/cloc) | `brew install cloc` |
 | [`act`](https://github.com/nektos/act) | `brew install act` |
 | [Ollama](https://ollama.com) | `curl -fsSL https://ollama.com/install.sh | sh` |
+| [Codexbar](https://github.com/steipete/CodexBar) | `brew install --cask steipete/tap/codexbar` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 

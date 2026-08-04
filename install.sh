@@ -125,6 +125,15 @@ else
   echo "🦙 Ollama is already running on the Severed Floor."
 fi
 
+
+# 15. Codexbar — menu bar companion for Codex
+if ! brew list --cask codexbar &>/dev/null; then
+  echo "📊 Codexbar has not been stationed at the menu bar. Installing..."
+  brew install --cask steipete/tap/codexbar
+else
+  echo "📊 Codexbar is already keeping watch from the menu bar."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"
