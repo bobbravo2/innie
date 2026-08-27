@@ -369,6 +369,24 @@ EOF
   [[ "$output" == *"act is already running scenes"* ]]
 }
 
+@test "installs Codexbar when the cask is not listed" {
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Codexbar has not been stationed"* ]]
+}
+
+@test "skips Codexbar when the cask is already listed" {
+  cat > "$MOCK_BIN/brew" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/brew"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Codexbar is already keeping watch"* ]]
+}
+
 # ---------------------------------------------------------------------------
 # Ollama section
 # ---------------------------------------------------------------------------
@@ -434,4 +452,5 @@ EOF
   [[ "$output" == *"cloc is already tallying lines"* ]]
   [[ "$output" == *"act is already running scenes"* ]]
   [[ "$output" == *"Ollama is already running"* ]]
+  [[ "$output" == *"Codexbar is already keeping watch"* ]]
 }
