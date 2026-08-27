@@ -25,6 +25,8 @@ To add a new tool to the installer, complete **all four** steps below. Skipping 
 
 Need the Board to approve something first? [Requisition a new tool](https://github.com/bobbravo2/innie/issues/new/choose).
 
+Need the Board to approve something first? [Requisition a new tool](https://github.com/bobbravo2/innie/issues/new/choose).
+
 ### Checklist
 
 1. **`install.sh`** — Add a numbered, idempotent block following the existing pattern:
