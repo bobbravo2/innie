@@ -443,6 +443,28 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Tilt section
+# ---------------------------------------------------------------------------
+
+@test "installs Tilt when tilt is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Tilt not found"* ]]
+}
+
+@test "skips Tilt when tilt is already installed" {
+  cat > "$MOCK_BIN/tilt" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/tilt"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Tilt is already illuminating"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
 
@@ -454,7 +476,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc act ollama codex; do
+  for tool in gcloud oc gh uvx python3 gws node cloc act ollama codex tilt; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -486,4 +508,5 @@ EOF
   [[ "$output" == *"act is already running scenes"* ]]
   [[ "$output" == *"Ollama is already running"* ]]
   [[ "$output" == *"Codexbar is already keeping watch"* ]]
+  [[ "$output" == *"Tilt is already illuminating"* ]]
 }

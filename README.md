@@ -47,9 +47,10 @@ The following tools are installed (or skipped if already present):
 | [Node.js + npm](https://nodejs.org) | `brew install node` |
 | [`cloc`](https://github.com/AlDanial/cloc) | `brew install cloc` |
 | [`act`](https://github.com/nektos/act) | `brew install act` |
-| [Ollama](https://ollama.com) | `curl -fsSL https://ollama.com/install.sh | sh` |
+| [Ollama](https://ollama.com) | `brew install ollama` |
 | [codex-cli](https://github.com/openai/codex) | `npm install -g @openai/codex` |
 | [Codexbar](https://github.com/steipete/CodexBar) | `brew install --cask steipete/tap/codexbar` |
+| [Tilt](https://tilt.dev) | `brew install tilt` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 

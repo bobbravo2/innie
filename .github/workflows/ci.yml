@@ -60,4 +60,5 @@ jobs:
           cloc --version
           act --version
           ollama --version
+          tilt version
           codex --version
