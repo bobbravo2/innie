@@ -61,3 +61,4 @@ jobs:
           act --version
           ollama --version
           tilt version
+          codex --version

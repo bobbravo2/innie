@@ -125,7 +125,24 @@ else
   echo "🦙 Ollama is already running on the Severed Floor."
 fi
 
-# 15. Tilt — local dev environment orchestrator
+
+# 15. codex-cli — OpenAI Codex CLI agent
+if ! command -v codex &>/dev/null; then
+  echo "🤖 codex-cli not found. The Board has authorised autonomous coding on the floor. Installing..."
+  npm install -g @openai/codex
+else
+  echo "🤖 codex-cli is already refining code on the Severed Floor."
+fi
+
+# 16. Codexbar — menu bar companion for Codex
+if ! brew list --cask codexbar &>/dev/null; then
+  echo "📊 Codexbar has not been stationed at the menu bar. Installing..."
+  brew install --cask steipete/tap/codexbar
+else
+  echo "📊 Codexbar is already keeping watch from the menu bar."
+fi
+
+# 17. Tilt — local dev environment orchestrator
 if ! command -v tilt &>/dev/null; then
   echo "🔦 Tilt not found. The dev environment needs orchestrating. Installing..."
   brew install tilt

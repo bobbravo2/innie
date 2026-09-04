@@ -43,6 +43,13 @@ EOF
 exit 0
 EOF
   chmod +x "$MOCK_BIN/sh"
+
+  # npm mock: codex-cli installs via npm.
+  cat > "$MOCK_BIN/npm" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/npm"
 }
 
 teardown() {
@@ -370,6 +377,50 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# codex-cli section
+# ---------------------------------------------------------------------------
+
+@test "installs codex-cli when codex is not on PATH" {
+  run env PATH="$MOCK_BIN" /bin/bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"codex-cli not found"* ]]
+}
+
+@test "skips codex-cli when codex is already installed" {
+  cat > "$MOCK_BIN/codex" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/codex"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"codex-cli is already refining code"* ]]
+}
+
+# ---------------------------------------------------------------------------
+# Codexbar section
+# ---------------------------------------------------------------------------
+
+@test "installs Codexbar when the cask is not listed" {
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Codexbar has not been stationed"* ]]
+}
+
+@test "skips Codexbar when the cask is already listed" {
+  cat > "$MOCK_BIN/brew" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/brew"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Codexbar is already keeping watch"* ]]
+}
+
+# ---------------------------------------------------------------------------
 # Ollama section
 # ---------------------------------------------------------------------------
 
@@ -425,7 +476,7 @@ EOF
 
 @test "exits successfully when all tools are already installed" {
   # Stubs for every command-based tool
-  for tool in gcloud oc gh uvx python3 gws node cloc act ollama tilt; do
+  for tool in gcloud oc gh uvx python3 gws node cloc act ollama codex tilt; do
     cat > "$MOCK_BIN/$tool" <<'EOF'
 #!/bin/bash
 exit 0
@@ -456,5 +507,6 @@ EOF
   [[ "$output" == *"cloc is already tallying lines"* ]]
   [[ "$output" == *"act is already running scenes"* ]]
   [[ "$output" == *"Ollama is already running"* ]]
+  [[ "$output" == *"Codexbar is already keeping watch"* ]]
   [[ "$output" == *"Tilt is already illuminating"* ]]
 }
