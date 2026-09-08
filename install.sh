@@ -85,7 +85,15 @@ else
   echo "🪄 Miro is already on the Severed Floor."
 fi
 
-# 10. Google Workspace CLI (gws) — one API for all of Workspace
+# 10. Podman Desktop — local containers without the outer daemon
+if ! brew list --cask podman-desktop &>/dev/null; then
+  echo "🐳 Podman Desktop has not been issued a corridor badge. Installing..."
+  brew install --cask podman-desktop
+else
+  echo "🐳 Podman Desktop is already cleared for the floor."
+fi
+
+# 11. Google Workspace CLI (gws) — one API for all of Workspace
 if ! command -v gws &>/dev/null; then
   echo "📧 Google Workspace CLI has not reported for duty. Installing..."
   brew install googleworkspace-cli
