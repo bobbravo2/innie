@@ -464,6 +464,29 @@ EOF
   [[ "$output" == *"Tilt is already illuminating"* ]]
 }
 
+# Slack section
+# ---------------------------------------------------------------------------
+
+@test "installs Slack when the cask is not listed" {
+  # Default brew mock returns 1 for "list --cask", so Slack is not installed
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Slack has not been cleared for the communications corridor"* ]]
+}
+
+@test "skips Slack when the cask is already listed" {
+  # Override brew to report all casks as installed
+  cat > "$MOCK_BIN/brew" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+  chmod +x "$MOCK_BIN/brew"
+
+  run bash "$SCRIPT"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Slack is already humming in the corridor"* ]]
+}
+
 # ---------------------------------------------------------------------------
 # End-to-end: all tools already present
 # ---------------------------------------------------------------------------
@@ -509,4 +532,5 @@ EOF
   [[ "$output" == *"Ollama is already running"* ]]
   [[ "$output" == *"Codexbar is already keeping watch"* ]]
   [[ "$output" == *"Tilt is already illuminating"* ]]
+  [[ "$output" == *"Slack is already humming in the corridor"* ]]
 }
