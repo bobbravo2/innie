@@ -150,6 +150,14 @@ else
   echo "🔦 Tilt is already illuminating the Severed Floor."
 fi
 
+# 18. Slack — the hallway where the team actually talks
+if ! brew list --cask slack &>/dev/null; then
+  echo "💬 Slack has not been cleared for the communications corridor. Installing..."
+  brew install --cask slack
+else
+  echo "💬 Slack is already humming in the corridor."
+fi
+
 echo ""
 echo "✅ Macrodata Refinement environment initialised."
 echo "   The work is mysterious and important. Praise Kier. 🫱"

@@ -51,6 +51,7 @@ The following tools are installed (or skipped if already present):
 | [codex-cli](https://github.com/openai/codex) | `npm install -g @openai/codex` |
 | [Codexbar](https://github.com/steipete/CodexBar) | `brew install --cask steipete/tap/codexbar` |
 | [Tilt](https://tilt.dev) | `brew install tilt` |
+| [Slack](https://slack.com/downloads/mac) | `brew install --cask slack` |
 
 The script is **idempotent** — re-running it is safe and will skip anything already installed.
 
